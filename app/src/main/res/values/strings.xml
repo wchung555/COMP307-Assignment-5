@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">COMP307 Lab5 - Ex1</string>
+    <string name="footer">(cc) 2016 Winnie Chung and Joseph Tinoco</string>
+
+    <string name="step1">Step 1 of 2: Cuisine</string>
+    <string name="step2">Step 2 of 2: Restaurant</string>
+    <string name="map">Map</string>
+
+    <string-array name="cuisines">
+        <item>American</item>
+        <item>Italian</item>
+        <item>Mediterranean</item>
+        <item>Chinese</item>
+        <item>Japanese</item>
+    </string-array>
+
+    <string-array name="american_restaurants">
+        <item>Bareburger</item>
+        <item>Denny\'s</item>
+        <item>Moxie\'s Bar and Grill</item>
+    </string-array>
+
+    <string-array name="chinese_restaurants">
+        <item>Mandarin Restaurant</item>
+        <item>Congee Queen</item>
+        <item>Ginger and Onion Cuisine</item>
+    </string-array>
+
+    <string-array name="italian_restaurants">
+        <item>Mama\'s Pizza</item>
+        <item>Scaddabush</item>
+        <item>Frankie Tomatto\'s</item>
+    </string-array>
+
+    <string-array name="japanese_restaurants">
+        <item>Sushi Legend</item>
+        <item>Kaiju</item>
+        <item>Don Don Izakaya</item>
+    </string-array>
+
+    <string-array name="mediterranean_restaurants">
+        <item>Jimmy the Greek</item>
+        <item>Pantheon Restaurant</item>
+        <item>Mykonos Mediterranean Grill</item>
+    </string-array>
+    <string name="title_activity_map">Map</string>
+</resources>
