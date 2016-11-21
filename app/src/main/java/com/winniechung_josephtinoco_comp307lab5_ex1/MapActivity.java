@@ -87,12 +87,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         builder.include(coordinates);
                         mMap.addMarker(new MarkerOptions().position(coordinates).title(chosenRestaurant).snippet(label));
                     }
-//            bounds = builder.build();
-//            LatLng toronto = new LatLng(43, -79);
-//                    builder.include(new LatLng(43.562664, -79.566448));
-//                    builder.include(new LatLng(43.888632, -79.176815));
                     bounds = builder.build();
                     CameraUpdate camera = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    mMap.setMaxZoomPreference(15.0f);
                     mMap.moveCamera(camera);
                 } catch (IOException e) {
                     Log.d(getString(R.string.app_name), e.toString());
