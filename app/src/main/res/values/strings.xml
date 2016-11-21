@@ -15,7 +15,7 @@
     </string-array>
 
     <string-array name="american_restaurants">
-        <item>Bareburger</item>
+        <item>Big Smoke Burger</item>
         <item>Denny\'s</item>
         <item>Moxie\'s Bar and Grill</item>
     </string-array>
@@ -23,24 +23,24 @@
     <string-array name="chinese_restaurants">
         <item>Mandarin Restaurant</item>
         <item>Congee Queen</item>
-        <item>Ginger and Onion Cuisine</item>
+        <item>Golden Star Restaurant</item>
     </string-array>
 
     <string-array name="italian_restaurants">
         <item>Mama\'s Pizza</item>
         <item>Scaddabush</item>
-        <item>Frankie Tomatto\'s</item>
+        <item>Il Fornello Restaurant</item>
     </string-array>
 
     <string-array name="japanese_restaurants">
-        <item>Sushi Legend</item>
+        <item>Ajisen Ramen</item>
         <item>Kaiju</item>
         <item>Don Don Izakaya</item>
     </string-array>
 
     <string-array name="mediterranean_restaurants">
         <item>Jimmy the Greek</item>
-        <item>Pantheon Restaurant</item>
+        <item>Teta\'s Mediterranean Kitchen</item>
         <item>Mykonos Mediterranean Grill</item>
     </string-array>
     <string name="title_activity_map">Map</string>

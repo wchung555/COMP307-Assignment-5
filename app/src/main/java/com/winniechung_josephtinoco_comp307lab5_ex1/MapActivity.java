@@ -1,5 +1,6 @@
 package com.winniechung_josephtinoco_comp307lab5_ex1;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -61,31 +62,44 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        final Context self = this;
 
-        Geocoder coder = new Geocoder(this, Locale.CANADA);
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        int padding = 20;
-        try {
-            List<Address> geocodeResults = coder.getFromLocationName(chosenRestaurant, 3);
-            Iterator<Address> locations = geocodeResults.iterator();
-            while (locations.hasNext()) {
-                Address location = locations.next();
-                LatLng coordinates = new LatLng(location.getLatitude(), location.getLongitude());
-                String label = "";
-                for (int i = 0; i < location.getMaxAddressLineIndex(); i++) {
-                    label += location.getAddressLine(i);
-                    if (i != location.getMaxAddressLineIndex() - 1) {
-                        label += "\n";
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                Geocoder coder = new Geocoder(self, Locale.CANADA);
+                LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                LatLngBounds bounds;
+                int padding = 20;
+                try {
+                    List<Address> geocodeResults = coder.getFromLocationName(chosenRestaurant, 3, 43.34, -79.79, 44.12, -79.06);
+                    Iterator<Address> locations = geocodeResults.iterator();
+                    while (locations.hasNext()) {
+                        Address location = locations.next();
+                        LatLng coordinates = new LatLng(location.getLatitude(), location.getLongitude());
+                        String label = "";
+                        for (int i = 0; i < location.getMaxAddressLineIndex(); i++) {
+                            label += location.getAddressLine(i);
+                            if (i != location.getMaxAddressLineIndex() - 1) {
+                                label += "\n";
+                            }
+                        }
+                        builder.include(coordinates);
+                        mMap.addMarker(new MarkerOptions().position(coordinates).title(chosenRestaurant).snippet(label));
                     }
+//            bounds = builder.build();
+//            LatLng toronto = new LatLng(43, -79);
+//                    builder.include(new LatLng(43.562664, -79.566448));
+//                    builder.include(new LatLng(43.888632, -79.176815));
+                    bounds = builder.build();
+                    CameraUpdate camera = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    mMap.moveCamera(camera);
+                } catch (IOException e) {
+                    Log.d(getString(R.string.app_name), e.toString());
                 }
-                builder.include(coordinates);
-                mMap.addMarker(new MarkerOptions().position(coordinates).title(chosenRestaurant).snippet(label));
             }
-            LatLngBounds bounds = builder.build();
-            CameraUpdate camera = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-            mMap.moveCamera(camera);
-        } catch (IOException e) {
-            Log.d(getString(R.string.app_name), e.toString());
-        }
+        });
+
+
     }
 }
