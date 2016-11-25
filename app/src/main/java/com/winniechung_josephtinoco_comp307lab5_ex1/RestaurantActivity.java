@@ -14,6 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
+/*
+
+RESTAURANT ACTIVITY
+
+Displays the list of restaurants for a given cuisine
+
+*/
 
 public class RestaurantActivity extends AppCompatActivity {
 

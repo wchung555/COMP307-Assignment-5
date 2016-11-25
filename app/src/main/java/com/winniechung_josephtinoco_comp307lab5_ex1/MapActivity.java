@@ -3,6 +3,8 @@ package com.winniechung_josephtinoco_comp307lab5_ex1;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -11,6 +13,10 @@ import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -19,12 +25,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+/*
+
+MAP ACTIVITY
+
+Displays the map and markers for the selected restaurant
+
+*/
 
 public class MapActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -64,6 +78,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
         mMap = googleMap;
         final Context self = this;
 
+        // Apply markers after the map is fully loaded.
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
@@ -78,7 +93,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         Address location = locations.next();
                         LatLng coordinates = new LatLng(location.getLatitude(), location.getLongitude());
                         String label = "";
-                        for (int i = 0; i < location.getMaxAddressLineIndex(); i++) {
+                        for (int i = 1; i < location.getMaxAddressLineIndex(); i++) {
                             label += location.getAddressLine(i);
                             if (i != location.getMaxAddressLineIndex() - 1) {
                                 label += "\n";
@@ -86,6 +101,37 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
                         }
                         builder.include(coordinates);
                         mMap.addMarker(new MarkerOptions().position(coordinates).title(chosenRestaurant).snippet(label));
+
+                        // Prepare an info window to display the address
+                        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+                            @Override
+                            public View getInfoWindow(Marker arg0) {
+                                return null;
+                            }
+
+                            @Override
+                            public View getInfoContents(Marker marker) {
+
+                                LinearLayout info = new LinearLayout(self);
+                                info.setOrientation(LinearLayout.VERTICAL);
+
+                                TextView title = new TextView(self);
+                                title.setTextColor(Color.BLACK);
+                                title.setGravity(Gravity.CENTER);
+                                title.setTypeface(null, Typeface.BOLD);
+                                title.setText(marker.getTitle());
+
+                                TextView snippet = new TextView(self);
+                                snippet.setTextColor(Color.GRAY);
+                                snippet.setText(marker.getSnippet());
+
+                                info.addView(title);
+                                info.addView(snippet);
+
+                                return info;
+                            }
+                        });
                     }
                     bounds = builder.build();
                     CameraUpdate camera = CameraUpdateFactory.newLatLngBounds(bounds, padding);

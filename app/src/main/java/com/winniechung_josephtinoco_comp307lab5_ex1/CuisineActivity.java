@@ -7,6 +7,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+/*
+
+CUISINE ACTIVITY
+
+Displays the list of cuisines
+
+*/
 
 public class CuisineActivity extends AppCompatActivity {
 
